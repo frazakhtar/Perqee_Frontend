@@ -7,7 +7,6 @@
   padding: 0 32px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   background-color: #ffffff;
   border-bottom: 1px solid #eee;
   position: sticky;
@@ -20,7 +19,6 @@
   border-color: #0b8ed3;
 }
 
-/* Links */
 .navbar__links {
   display: flex;
   align-items: center;
@@ -36,4 +34,9 @@
 
 .navbar__links li:hover {
   color: #0b8ed3;
+}
+
+.nav-link {
+  color: #000;
+  text-decoration: none;
 }

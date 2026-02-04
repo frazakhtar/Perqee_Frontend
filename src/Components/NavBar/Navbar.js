@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav className="navbar">
       <ul className="navbar__links">
         <li>
-          <Link to="/">
+          <Link to="/" className="nav-link">
             <AiFillHome size={22} />
           </Link>
         </li>
