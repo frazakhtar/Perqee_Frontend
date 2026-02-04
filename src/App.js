@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
+
+import Home from "./Components/Home/HomePage";
+import About from "./Components/About/About";
+import Cart from "./Components/Cart/Cart";
+import Navbar from "./Components/NavBar/Navbar";
 
 function App() {
+  // global search state (applied on Enter)
+  const [searchQuery, setSearchQuery] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* Pass setter to Navbar */}
+      <Navbar setSearchQuery={setSearchQuery} />
+
+      <Routes>
+        {/* Pass searchQuery to Home */}
+        <Route path="/" element={<Home searchQuery={searchQuery} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/cart" element={<Cart />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
+      </Routes>
+    </>
   );
 }
 
