@@ -1,6 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { Box, Link } from "@mui/material";
+import {
+  Box,
+  Link,
+  Card,
+  CardContent,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 import "./Homepage.css";
+
+const offerCards = [
+  {
+    title: "Amazon Gift Card",
+    description: "Flat 10% cashback on Amazon vouchers",
+  },
+  {
+    title: "Flipkart Gift Card",
+    description: "Save extra 12% on Flipkart gift cards",
+  },
+  {
+    title: "Myntra Gift Card",
+    description: "Fashion deals up to 20% OFF",
+  },
+];
+
+const dropdownOffers = {
+  Amazon: "Get 10% cashback on Amazon gift cards",
+  Flipkart: "Flat ₹500 OFF on Flipkart vouchers",
+  Myntra: "Extra 15% OFF on Myntra vouchers",
+};
 
 const images = [
   "https://www.gyftr.com/instantvouchers/_next/image?url=https%3A%2F%2Fcdn.gyftr.com%2Fsmartbuy%2Fhome-banner%2F2026-01-19T12_28_02.333Z-Flipkart-Banner.png&w=1920&q=75",
@@ -83,6 +113,7 @@ const brands = [
 
 const HomePage = ({ searchQuery }) => {
   const [index, setIndex] = useState(0);
+  const [selectedBrand, setSelectedBrand] = useState("Amazon");
   const [debouncedQuery, setDebouncedQuery] = useState("");
 
   /* ---------------- Debounce search ---------------- */
@@ -302,6 +333,89 @@ const HomePage = ({ searchQuery }) => {
               No brands found 😕
             </Box>
           )}
+        </Box>
+      </Box>
+
+      {/* ================= OFFERS SECTION ================= */}
+      <Box sx={{ px: { xs: 2, md: 6 }, py: 6 }}>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+            gap: 4,
+          }}
+        >
+          {/* LEFT COLUMN – OFFER CARDS */}
+          <Box>
+            <Box sx={{ fontSize: "1.4rem", fontWeight: 700, mb: 3 }}>
+              Popular Offers
+            </Box>
+
+            <Box sx={{ display: "grid", gap: 3 }}>
+              {offerCards.map((offer, index) => (
+                <Card
+                  key={index}
+                  sx={{
+                    borderRadius: 3,
+                    boxShadow: 3,
+                    transition: "0.3s",
+                    "&:hover": {
+                      boxShadow: 6,
+                      transform: "translateY(-4px)",
+                    },
+                  }}
+                >
+                  <CardContent>
+                    <Box sx={{ fontWeight: 600, fontSize: "1.1rem", mb: 1 }}>
+                      {offer.title}
+                    </Box>
+                    <Box sx={{ color: "text.secondary", fontSize: "0.95rem" }}>
+                      {offer.description}
+                    </Box>
+                  </CardContent>
+                </Card>
+              ))}
+            </Box>
+          </Box>
+
+          {/* RIGHT COLUMN – DROPDOWN + CARD */}
+          <Box>
+            <Box sx={{ fontSize: "1.4rem", fontWeight: 700, mb: 3 }}>
+              Choose Brand Offer
+            </Box>
+
+            <FormControl fullWidth sx={{ mb: 3 }}>
+              <InputLabel>Select Brand</InputLabel>
+              <Select
+                value={selectedBrand}
+                label="Select Brand"
+                onChange={(e) => setSelectedBrand(e.target.value)}
+              >
+                {Object.keys(dropdownOffers).map((brand) => (
+                  <MenuItem key={brand} value={brand}>
+                    {brand}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <Card
+              sx={{
+                borderRadius: 3,
+                boxShadow: 4,
+                backgroundColor: "#f8fafc",
+              }}
+            >
+              <CardContent>
+                <Box sx={{ fontWeight: 600, fontSize: "1.1rem", mb: 1 }}>
+                  {selectedBrand} Offer
+                </Box>
+                <Box sx={{ fontSize: "0.95rem", color: "text.secondary" }}>
+                  {dropdownOffers[selectedBrand]}
+                </Box>
+              </CardContent>
+            </Card>
+          </Box>
         </Box>
       </Box>
     </div>

@@ -13,6 +13,8 @@ const Navbar = () => {
         </li>
         <li>Categories</li>
         <li>Occasions</li>
+      </ul>
+      <ul className="navbar__links">
         <li>Login</li>
       </ul>
     </nav>
