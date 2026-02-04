@@ -5,7 +5,7 @@ import { useState } from "react";
 import Home from "./Components/Home/HomePage";
 import About from "./Components/About/About";
 import Cart from "./Components/Cart/Cart";
-import Navbar from "./Components/NavBar/Navbar";
+import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
       <main className="main-content">
         <>
           {/* Pass setter to Navbar */}
-          <Navbar setSearchQuery={setSearchQuery} />
+          <Header setSearchQuery={setSearchQuery} />
 
           <Routes>
             {/* Pass searchQuery to Home */}

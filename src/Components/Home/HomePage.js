@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Link } from "@mui/material";
+import "./Homepage.css";
 
 const images = [
   "https://www.gyftr.com/instantvouchers/_next/image?url=https%3A%2F%2Fcdn.gyftr.com%2Fsmartbuy%2Fhome-banner%2F2026-01-19T12_28_02.333Z-Flipkart-Banner.png&w=1920&q=75",
@@ -130,10 +131,11 @@ const HomePage = ({ searchQuery }) => {
   };
 
   return (
-    <>
+    <div className="main-section">
       {/* ================= CAROUSEL ================= */}
       {/* ================= CAROUSEL ================= */}
       <Box
+        className="carousel-css-custom"
         sx={{
           width: "100%",
           height: { xs: 240, md: 350 },
@@ -302,7 +304,7 @@ const HomePage = ({ searchQuery }) => {
           )}
         </Box>
       </Box>
-    </>
+    </div>
   );
 };
 
