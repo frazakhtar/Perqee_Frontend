@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
   Link,
@@ -261,11 +262,11 @@ const HomePage = ({ searchQuery }) => {
         >
           {filteredBrands.length > 0 ? (
             filteredBrands.map((brand) => (
-              <Link
+              <Box
                 key={brand.name}
-                href={brand.link}
-                underline="none"
-                sx={{ color: "inherit" }}
+                component={RouterLink}
+                to={brand.link}
+                sx={{ textDecoration: "none", color: "inherit" }}
               >
                 <Box
                   sx={{
@@ -318,7 +319,7 @@ const HomePage = ({ searchQuery }) => {
                     {highlightText(brand.name, debouncedQuery)}
                   </Box>
                 </Box>
-              </Link>
+              </Box>
             ))
           ) : (
             <Box
@@ -348,7 +349,7 @@ const HomePage = ({ searchQuery }) => {
           {/* LEFT COLUMN – OFFER CARDS */}
           <Box>
             <Box sx={{ fontSize: "1.4rem", fontWeight: 700, mb: 3 }}>
-              Popular Offers
+              Popular Card Offers
             </Box>
 
             <Box sx={{ display: "grid", gap: 3 }}>

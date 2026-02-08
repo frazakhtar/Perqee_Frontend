@@ -4,17 +4,8 @@ import { AiFillHome } from "react-icons/ai";
 import { useState } from "react";
 import Login from "../Modal/AuthModal/Login";
 import SignupForm from "../Modal/AuthModal/SignupForm";
-
 const Navbar = () => {
-  const [loginOpen, setLoginOpen] = useState(false);
-  const [signupOpen, setSignupOepn] = useState(false);
-
-  const sendDataToParent = (val) => {
-    if (val === true) {
-      setLoginOpen(false);
-      setSignupOepn(true);
-    }
-  };
+  const [authMode, setAuthMode] = useState(null);
 
   return (
     <nav className="navbar">
@@ -27,14 +18,24 @@ const Navbar = () => {
         <li>Categories</li>
         <li>Occasions</li>
       </ul>
+
       <ul className="navbar__links">
-        <li onClick={() => setLoginOpen(true)}>Login</li>
-        <Login
-          sendDataToParent={sendDataToParent}
-          isOpen={loginOpen}
-          onClose={() => setLoginOpen(false)}
-        />
-        {signupOpen && <SignupForm onClose={() => setSignupOepn(false)} />}
+        <li onClick={() => setAuthMode("login")}>Login</li>
+
+        {authMode === "login" && (
+          <Login
+            isOpen={true}
+            onClose={() => setAuthMode(null)}
+            sendDataToParent={() => setAuthMode("signup")}
+          />
+        )}
+
+        {authMode === "signup" && (
+          <SignupForm
+            onClose={() => setAuthMode(null)}
+            sendDataToParent={() => setAuthMode("login")}
+          />
+        )}
       </ul>
     </nav>
   );

@@ -1,16 +1,36 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./AuthModal.css";
-import SignupForm from "./SignupForm";
+import axios from "axios";
 
 const Login = ({ isOpen, onClose, sendDataToParent }) => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
-  const [mobile, setMobile] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    //  otp: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Mobile Number:", mobile);
+    console.log(formData);
+    axios
+      .post("http://127.0.0.1:4000/login", {
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((result) => {
+        console.log(result);
+        navigate("/about");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -24,13 +44,20 @@ const Login = ({ isOpen, onClose, sendDataToParent }) => {
 
         <form onSubmit={handleSubmit}>
           <input
-            type="tel"
-            placeholder="Enter mobile number"
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
+            type="Email"
+            placeholder="Enter Email"
+            name="email"
+            onChange={handleChange}
             required
           />
-          <button type="submit">{isLogin ? "Send OTP" : "Register"}</button>
+          <input
+            type="Password"
+            placeholder="Enter your password"
+            name="password"
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">{isLogin ? "Login" : "Register"}</button>
         </form>
 
         <p className="switch-text">

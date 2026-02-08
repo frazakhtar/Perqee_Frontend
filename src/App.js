@@ -7,6 +7,7 @@ import About from "./Components/About/About";
 import Cart from "./Components/Cart/Cart";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
+import BrandPage from "./Components/BrandPage/BrandPage";
 
 function App() {
   // global search state (applied on Enter)
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<Home searchQuery={searchQuery} />} />
             <Route path="/about" element={<About />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/brand/:brandSlug" element={<BrandPage />} />
             {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </>

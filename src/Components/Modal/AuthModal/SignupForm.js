@@ -1,12 +1,15 @@
 import { useState } from "react";
 import "./AuthModal.css";
+import axios from "axios";
 
 const SignupForm = ({ onClose, sendDataToParent }) => {
+  console.log("sendDataToParent:", sendDataToParent);
+
   const [formData, setFormData] = useState({
     name: "",
-    mobile: "",
+    password: "",
     email: "",
-    otp: "",
+    //  otp: "",
   });
 
   const handleChange = (e) => {
@@ -16,6 +19,10 @@ const SignupForm = ({ onClose, sendDataToParent }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Signup Data:", formData);
+    axios
+      .post("http://localhost:4000/register", formData)
+      .then((result) => console.log("result", result))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -37,33 +44,31 @@ const SignupForm = ({ onClose, sendDataToParent }) => {
           />
 
           <input
-            type="tel"
-            name="mobile"
-            placeholder="Mobile Number"
-            required
+            type="email"
+            name="email"
+            placeholder="abc@mail.com"
             onChange={handleChange}
           />
 
           <input
-            type="email"
-            name="email"
-            placeholder="Email (optional)"
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
             onChange={handleChange}
           />
 
-          <div className="otp-row">
-            <input
-              type="text"
-              name="otp"
-              placeholder="Enter OTP"
-              onChange={handleChange}
-            />
-            <button type="button" className="otp-btn">
-              Send OTP
-            </button>
-          </div>
-
           <button type="submit">Sign Up</button>
+
+          <p className="switch-text">
+            <span>Already have an account?</span>
+            <span
+              className="signup_login"
+              onClick={() => sendDataToParent(false)}
+            >
+              Login
+            </span>
+          </p>
         </form>
       </div>
     </div>
